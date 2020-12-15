@@ -1,0 +1,24 @@
+def get_subpatterns(patterns, d):
+    all_results = []
+    for pattern in patterns:
+        length = len(pattern)
+        l = len(pattern)//(int(d)+1)
+        pat = pattern
+        if len(pattern) == 3:
+            results = [(pattern[:1], 0, pat), (pattern[1:], 1, pat)]
+        else:
+            results = []
+            count = 0
+            while len(pattern) > 0:
+                if len(pattern) < l * 2:
+                    results.append((pattern, count, pat))
+                    count = count + l
+                    break
+                else:
+                    results.append((pattern[:l], count, pat))
+                    count = count + l
+                    pattern = pattern[l:]
+        all_results.append(results)
+    return all_results
+
+print (get_subpatterns(["ACTTAGGCTCGGGATAATCCGGA"], 3))
